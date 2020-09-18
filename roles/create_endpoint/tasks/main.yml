@@ -1,0 +1,34 @@
+---
+# tasks file for create_endpoint
+- name: Ansible check directory.
+  stat:
+   path: host_vars/endpoints
+  register: endpoint_folder
+   
+- name: Ansible Create directory if not exists
+  file:
+    path: host_vars/endpoints
+    state: directory
+    mode: 0755
+  when: endpoint_folder.stat.exists == false
+
+  
+- name: Ansible check endpoint vault file
+  stat:
+   path: "host_vars/endpoints/{{endpoint}}"
+  register: endpoint_vault_file
+
+- name: Create endpoint file with content
+  copy:
+    dest: "host_vars/endpoints/{{endpoint}}"
+    content: |
+      ---
+      endpoint_name: {{endpoint}}
+      endpoint_host: {{endpoint_host}}
+      endpoint_user: {{endpoint_user}}
+      endpoint_password: {{endpoint_password}}
+  when: endpoint_vault_file.stat.exists == false
+  
+- name: Ansible encrypt endpont file using ansible-vault
+  command: ansible-vault encrypt host_vars/endpoints/{{endpoint}}
+  when: endpoint_vault_file.stat.exists == false

@@ -1,0 +1,6 @@
+---
+# tasks file for remove_endpoint
+- name: Remove Endpoint
+  file:
+    path: "host_vars/endpoints/{{endpoint}}"
+    state: absent

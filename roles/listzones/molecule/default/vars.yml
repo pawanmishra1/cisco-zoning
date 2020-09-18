@@ -1,0 +1,31 @@
+# Copyright © 2020 Dell Inc. or its subsidiaries. All Rights Reserved.
+# This software is protected, without limitation, by copyright law and
+# international treaties. Use of this software and the intellectual property
+# contained therein is expressly limited to the terms and conditions of the
+# License Agreement under which it is provided by or on behalf of Dell Inc
+# or its subsidiaries.
+# 
+# Author: SHANKAR THANGARAJ [ S.Thangaraj@dell.com ]
+# File Created: 2020-08-25, 12:09:48 pm
+# .........................................................................
+
+vsan_number : 11
+zone_name : all
+zoneset_name : fabricA_1590569736751
+zoneset_action: activate  #deactivate
+zone_mode: enhanced #basic
+add_pwwns:
+    - pwwn: 1a:11:a1:11:11:13:aa:f7 
+    - pwwn: 1b:11:b1:11:11:13:bb:f8
+remove_pwwns:
+    - {pwwn: 1a:11:a1:11:11:13:aa:f7 , remove: True}
+    - {pwwn: 1b:11:b1:11:11:13:bb:f8 , remove: True}
+
+add_zones_to_zoneset:
+    - name: DEMOTestZone1
+    - name: DEMOTestZone2
+    - name: DEMOTestZone3
+remove_zones_from_zoneset:
+    - {name: DEMOTestZone1 , remove: True}
+    - {name: DEMOTestZone2 , remove: True}
+    - {name: DEMOTestZone3 , remove: True}

@@ -1,0 +1,15 @@
+---
+  - name: Include common and vault variables
+    block:
+      - include_vars: host_vars/endpoints/{{ lookup('env','CISCO_MDS_ENDPOINT_NAME') }}
+      - set_fact:
+          host: "{{endpoint_host}}"
+      - set_fact:
+          username: "{{endpoint_user}}"
+      - set_fact:
+          password: "{{endpoint_password}}"
+      - set_fact:
+          transport: cli
+      - set_fact:
+          timeout: 30
+     

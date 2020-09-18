@@ -1,0 +1,13 @@
+---
+# This is an example playbook to execute Ansible tests.
+
+- name: Verify
+  hosts: all
+  collections:
+      - dtms.dellemc_cisco_collection
+  vars_files:
+      - vars.yml
+  tasks:
+  - name: Example assertion
+    assert:
+      that: true

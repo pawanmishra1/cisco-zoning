@@ -1,0 +1,39 @@
+# Copyright © 2020 Dell Inc. or its subsidiaries. All Rights Reserved.
+# This software is protected, without limitation, by copyright law and
+# international treaties. Use of this software and the intellectual property
+# contained therein is expressly limited to the terms and conditions of the
+# License Agreement under which it is provided by or on behalf of Dell Inc
+# or its subsidiaries.
+# 
+# Author: SHANKAR T [ S.Thangaraj@dell.com ]
+# File Created: 2020-07-13, 2:43:09 pm
+# .........................................................................
+#Modified By: SHANKAR THANGARAJ
+#Last Modified: Thu Aug 27 2020
+# -------------------------------------------------------------------------
+
+---
+- name: Setup Variables
+  include_role:
+    name: common
+    tasks_from: dellemc-cisco-var-setup
+- include_vars: vars.yml
+- name: List Zones
+  nxos_dellemc_cisco_mds_zones:
+    provider: 
+      host: "{{host}}"
+      username: "{{username}}"
+      password: "{{password}}"
+      transport: "{{transport}}"
+      timeout: "{{timeout}}"
+    zoneverify:
+      - name: "{{zone_name}}"
+        vsan: "{{vsan_number}}"
+  register: result
+- debug: var=result  
+  
+
+
+
+
+  

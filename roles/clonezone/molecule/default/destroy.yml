@@ -1,0 +1,32 @@
+# Copyright © 2020 Dell Inc. or its subsidiaries. All Rights Reserved.
+# This software is protected, without limitation, by copyright law and
+# international treaties. Use of this software and the intellectual property
+# contained therein is expressly limited to the terms and conditions of the
+# License Agreement under which it is provided by or on behalf of Dell Inc
+# or its subsidiaries.
+# 
+# Author: Nishu Prakash. [ nishu.prakash@dell.com ]
+# File Created: 2020-07-30, 2:02:18 pm
+# .........................................................................
+# Modified By: Nishu Prakash. [ nishu.prakash@dell.com ]
+# Last Modified: 2020-08-27, 6:35:17 pm 
+# -------------------------------------------------------------------------
+
+---
+- name: Destroy
+  hosts: localhost
+  connection: local
+  collections:
+    - dtms.dellemc_cisco_collection
+  gather_facts: false
+  no_log: "{{ molecule_no_log }}"
+  tasks:
+    - name: Populate instance config
+      set_fact:
+        instance_conf: {}
+
+    - name: Dump instance config
+      copy:
+        content: "{{ instance_conf | to_json | from_json | molecule_to_yaml | molecule_header }}"
+        dest: "{{ molecule_instance_config }}"
+      when: server.changed | default(false) | bool

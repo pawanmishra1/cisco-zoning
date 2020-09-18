@@ -1,0 +1,9 @@
+---
+- name: Converge
+  hosts: localhost
+  collections:
+    - dtms.dellemc_cisco_collection
+  tasks:
+    - name: "Include removezonefromzoneset"
+      include_role:
+        name: "removezonefromzoneset"

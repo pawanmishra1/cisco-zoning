@@ -1,0 +1,7 @@
+---
+- name: Converge
+  hosts: all
+  tasks:
+    - name: "Include remove_endpoint"
+      include_role:
+        name: "remove_endpoint"

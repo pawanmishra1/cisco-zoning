@@ -1,0 +1,8 @@
+---
+# vars file for common
+    host: "{{endpoint_host}}"
+    username: "{{endpoint_user}}"
+    password: "{{endpoint_password}}"
+    transport: cli
+    timeout: 30
+    

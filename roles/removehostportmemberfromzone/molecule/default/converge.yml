@@ -1,0 +1,9 @@
+---
+- name: Converge
+  hosts: localhost
+  collections:
+    - dtms.dellemc_cisco_collection
+  tasks:
+    - name: "Include removehostportmemberfromzone"
+      include_role:
+        name: "removehostportmemberfromzone"

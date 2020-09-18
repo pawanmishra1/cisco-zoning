@@ -1,0 +1,10 @@
+---
+- name: Converge
+  hosts: localhost
+  collections:
+    - dtms.dellemc_cisco_collection
+  tasks:
+    - include_vars: vars.yml
+    - name: "Include addzonestozoneset"
+      include_role:
+        name: "addzonestozoneset"

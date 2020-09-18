@@ -1,0 +1,10 @@
+---
+- name: Converge
+  hosts: localhost
+  collections:
+    - dtms.dellemc_cisco_collection
+  tasks:
+    - include_vars: vars.yml
+    - name: "Include addhostportmembertozone"
+      include_role:
+        name: "addhostportmembertozone"

@@ -1,0 +1,33 @@
+---
+  dependency:
+    name: galaxy
+  driver:
+    name: delegated
+    options:
+        managed: False
+        ansible_connection_options:
+          ansible_connection: local
+  platforms:
+    - name: instance
+      image: docker.io/pycontribs/centos:7
+      pre_build_image: true
+  provisioner:
+    name: ansible
+    env:
+      ANSIBLE_COLLECTIONS_PATHS: /services/collections
+    config_options:
+      defaults:
+        vault_password_file: "/vault/.vault_pass"
+  verifier:
+    name: ansible
+  scenario:
+      test_sequence:
+        - dependency
+        - lint
+        - syntax
+        - prepare
+        - converge
+        - side_effect
+        - verify
+        - cleanup
+    

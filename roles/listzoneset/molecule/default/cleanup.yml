@@ -1,0 +1,40 @@
+# Copyright © 2020 Dell Inc. or its subsidiaries. All Rights Reserved.
+# This software is protected, without limitation, by copyright law and
+# international treaties. Use of this software and the intellectual property
+# contained therein is expressly limited to the terms and conditions of the
+# License Agreement under which it is provided by or on behalf of Dell Inc
+# or its subsidiaries.
+# 
+# Author: Nishu Prakash. [ nishu.prakash@dell.com ]
+# File Created: 2020-07-30, 1:55:50 pm
+# .........................................................................
+
+---
+- name: Cleanup
+  hosts: all
+  collections:
+    - dtms.dellemc_cisco_collection
+  vars_files:
+    - vars.yml
+  gather_facts: false
+  tasks:
+    - include_tasks: "../../../common/tasks/dellemc-cisco-var-setup.yml"
+    
+    - name: Clear cache
+      lineinfile:
+        path: /root/.cache/molecule/listzoneset/default/state.yml
+        regexp: '^prepared:'
+        line: 'prepared: false'
+
+    - name: Remove Unity Endpoint created for test
+      include_role:
+        name: remove_endpoint
+      vars:
+        endpoint: "{{ lookup('env','CISCO_MDS_ENDPOINT_NAME') }}"
+
+    - name: Remove Endpoint directory
+      file:
+        path: "host_vars"
+        state: absent
+    
+    
